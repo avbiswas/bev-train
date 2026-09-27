@@ -1,0 +1,14 @@
+[project]
+name = "bev-train"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "datasets>=5.0.1",
+    "ipykernel>=7.3.0",
+    "peft>=0.21.0",
+    "pyyaml>=6.0.3",
+    "torch>=2.14.0",
+    "transformers>=5.17.0",
+]

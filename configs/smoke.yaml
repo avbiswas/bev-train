@@ -1,0 +1,37 @@
+# Sanity check: overfit 10 questions (LoRA + head). Loss should go to ~0 and train accuracy to 1.0 within a few epochs.
+seed: 0
+
+model:
+  name: Qwen/Qwen3-0.6B
+  num_layers: 20            # run only the first N of Qwen's 28 decoder layers (null = all)
+
+data:
+  max_train_questions: 10   # null = full train split
+  max_test_questions: 0     # 0 = no validation, null = full test split
+  max_state_tokens: 512
+  max_choice_tokens: 64
+  batch_size: 5
+  num_workers: 2
+
+lora:
+  last_k_layers: 4          # LoRA on the attention projections of the last k *kept* layers (0 = frozen Qwen)
+  r: 8
+  alpha: 16
+  dropout: 0.0
+
+head:
+  new_dim: 512
+  num_layers: 2
+
+optim:
+  epochs: 30
+  lr_lora: 1.0e-4
+  lr_head: 1.0e-3
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  grad_clip: 1.0
+
+logging:
+  log_every: 2
+  eval_every: 1000
+  save_every: 1000          # overwrites checkpoints/latest

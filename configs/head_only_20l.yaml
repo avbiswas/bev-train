@@ -1,0 +1,38 @@
+# Frozen first 20 Qwen layers + head only, 20K train questions.
+# Same hyperparameters as the Mac run 20260927-130308 (57.7% test), which used the older prompt format.
+seed: 0
+
+model:
+  name: Qwen/Qwen3-0.6B
+  num_layers: 20            # run only the first N of Qwen's 28 decoder layers (null = all)
+
+data:
+  max_train_questions: 20000  # null = full train split
+  max_test_questions: 1000    # 0 = no validation, null = full test split
+  max_state_tokens: 512
+  max_choice_tokens: 64
+  batch_size: 16
+  num_workers: 4
+
+lora:
+  last_k_layers: 0          # LoRA on the attention projections of the last k *kept* layers (0 = frozen Qwen)
+  r: 8
+  alpha: 16
+  dropout: 0.0
+
+head:
+  new_dim: 512
+  num_layers: 2
+
+optim:
+  epochs: 1
+  lr_lora: 1.0e-4
+  lr_head: 1.0e-3
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  grad_clip: 1.0
+
+logging:
+  log_every: 10
+  eval_every: 250           # validation; checkpoints/best is kept by test accuracy
+  save_every: 250           # overwrites checkpoints/latest

@@ -14,3 +14,20 @@ runs/
 
 # macOS
 .DS_Store
+
+# Local environments and training/benchmark artifacts
+.env
+.envrc
+.local-experiments/
+jevbench/
+bench/
+data/
+server_logs/
+
+# Local experiment recipes, notes, and cloud setup alias
+build_data_*.py
+EXPERIMENTS.md
+expt_monitoring.md
+setup_cloud.sh
+configs/v*_lora*.yaml
+configs/full_lora_k8*.yaml

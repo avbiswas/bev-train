@@ -14,7 +14,7 @@ def question_to_choices(question):
     """Turns any of the 3 question types into a list of option strings (+ label index if present)."""
     if question["type"] == "choice":
         keys = list(question["criteria"])
-        choices = [f"{key}: {question['criteria'][key]}" for key in keys]
+        choices = [f"{key}: {question['criteria'][key]}" if question["criteria"][key] else key for key in keys]
         label = keys.index(question["label"]) if "label" in question else None
     elif question["type"] == "score":
         # Choices share position ids, so the level index is written into the text to keep the ordering

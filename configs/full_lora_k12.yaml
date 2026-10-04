@@ -1,0 +1,39 @@
+# First 20 Qwen layers, with LoRA on layers 8-19 and a trainable choice head.
+# Micro-batch 32 x 2 accumulation steps = 64 questions per optimizer step.
+seed: 0
+
+model:
+  name: Qwen/Qwen3-0.6B
+  num_layers: 20
+
+data:
+  max_train_questions: null
+  max_test_questions: 5000
+  max_state_tokens: 1024
+  max_choice_tokens: 64
+  batch_size: 32
+  num_workers: 6
+
+lora:
+  last_k_layers: 12
+  r: 8
+  alpha: 16
+  dropout: 0.0
+
+head:
+  new_dim: 512
+  num_layers: 2
+
+optim:
+  epochs: 1
+  lr_lora: 1.0e-4
+  lr_head: 1.0e-3
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  grad_clip: 1.0
+  grad_accum_steps: 2
+
+logging:
+  log_every: 20
+  eval_every: 1000
+  save_every: 500

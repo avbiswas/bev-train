@@ -1,12 +1,12 @@
+# Training JEV networks from Qwen
+
+Train a network that answers choice, yes/no (`noul`), and score questions using a Qwen backbone and a small attention head. Choices share the same starting position IDs, and the attention mask prevents each choice from seeing the others. The head scores the choices without depending on their order.
+
 [Watch the video: Training JEV networks from Qwen](https://youtu.be/sF3CNPbWA8o)
 
 If you find this helpful, consider supporting on Patreon — it hosts all code, projects, slides, and write-ups from the YouTube channel.
 
 [<img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron!" width="200">](https://www.patreon.com/NeuralBreakdownwithAVB)
-
-# Training JEV networks from Qwen
-
-Train a network that answers choice, yes/no (`noul`), and score questions using a Qwen backbone and a small attention head. Choices share the same starting position IDs, and the attention mask prevents each choice from seeing the others. The head scores the choices without depending on their order.
 
 ## Start here: `arch.ipynb`
 
